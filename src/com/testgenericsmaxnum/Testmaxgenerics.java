@@ -1,42 +1,55 @@
 package com.testgenericsmaxnum;
 
-public class Testmaxgenerics {
-    public static void toPrint(String[] stringArray) {
-        for (String element : stringArray) {
-            System.out.println(element);
-        }
-        System.out.println();
+public class MaximumTest <T extends Comparable<T>> {
+    T x, y, z;
+
+    public MaximumTest(T x, T y, T z) {
+        this.x = x;
+        this.y = y;
+        this.z = z;
     }
 
-    public static int compareTo(String[] stringArray)
-    {
-        int max = stringArray[0];
-        for (int element : stringArray) {
-            if (stringArray[1] > max)
-                max = stringArray[1];
-            if (stringArray[2] > max)
-                max = stringArray[2];
+    public T maximum() {
+        return MaximumTest.maximum(x, y, z);
+    }
+
+    public static <T extends Comparable<T>> T maximum(T x, T y, T z) {
+        T max = x;
+        if (y.compareTo(max) > 0) {
+            max = y;
         }
+        if (z.compareTo(max) > 0) {
+            max = z;
+        }
+        printMax(x, y, z, max);
         return max;
     }
-    public static void main(String[] args)
-        {
-            //Integer[] intArray = {50, 10, 20};
-            //Double[] doubleArray = {7.6, 9.6, 8.3};
-            String[] stringArray= {"Apple", "Peace","Banana"}
 
-            //Testmaxgenerics.toPrint(intArray);
-            //int maximum_int = Testmaxgenerics.compareTo(intArray);
-            //System.out.println("Maximum integer number is:" + maximum_int);
-            //Testmaxgenerics.toPrint(doubleArray);
-            //double maximum_float = Testmaxgenerics.compareTo(doubleArray);
-            //System.out.println("Maximum floating number is:" + maximum_float);
-            Testmaxgenerics.toPrint(stringArray);
-            String maximum_string = Testmaxgenerics.compareTo(stringArray);
-            System.out.println("Maximum floating number is:" + maximum_string);
-
+    public static String testMaximum(String x, String y, String z) {
+        String max = x;
+        if (y.compareTo(max) > 0) {
+            max = y;
+        }
+        if (z.compareTo(max) > 0) {
+            max = z;
+        }
+        printMax(x, y, z, max);
+        return max;
     }
 
+    public static <T> void printMax(T x, T y, T z, T max) {
+        System.out.println(max);
+    }
+
+    public static void main(String[] args) {
+        Integer xInt = 3, yInt = 4, zInt = 5;
+        Float xF1 = 6.6f, yF1 = 7.7f, zF1 = 8.8f;
+        String xStr = "Apple", yStr = "Peace", zStr = "Banana";
+
+        MaximumTest.testMaximum(xStr, yStr, zStr);
+        new MaximumTest(xInt, yInt, zInt).maximum();
+        new MaximumTest(xF1, yF1, zF1).maximum();
+        new MaximumTest(xStr, yStr, zStr).maximum();
+
+    }
 }
-
-
